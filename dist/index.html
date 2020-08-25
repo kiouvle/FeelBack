@@ -1,39 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Test Task</title>
   <link rel="stylesheet" href="/style.e308ff8e.css">
 <script src="/style.e308ff8e.js"></script></head>
+
 <body>
   <div class="page">
-    
+
     <section class="panel panel_colleagues">
       <h2 class="panel__title">Мои коллеги</h2>
-      
+
     </section>
     <section class="panel panel_feedback">
       <h2 class="panel__title">Мой фидбек</h2>
-      
+
     </section>
     <section class="panel panel_leaders">
       <h2 class="panel__title">Лидеры качеств</h2>
       <select class="panel__select">
-        <option class="leaders__select_option">Weirdness</option>
-        <option class="leaders__select_option">Dexterity</option>
-        <option class="leaders__select_option">Intelligence</option>
+        <option value="all" class="leaders__select_option">All</option>
+        <option value="weirdness" class="leaders__select_option">Weirdness</option>
+        <option value="dexterity" class="leaders__select_option">Dexterity</option>
+        <option value="intelligence" class="leaders__select_option">Intelligence</option>
 
       </select>
-      
+
     </section>
     <section class="letter">
       <h2 class="letter__title">Анонимное письмо</h2>
       <p class="letter__subtitle">Напиши письмо hr'у</p>
-        <textarea class="letter__input" rows="10"></textarea>
-        <button class="letter__button">Отправить</button>
+      <textarea class="letter__input" rows="10"></textarea>
+      <button class="letter__button">Отправить</button>
     </section>
+    <div class="popup">
+      <div class="popup__content">
+        <img src="/close.4440cd52.svg" alt="" class="popup__close">
+        <h2 class="popup__title">Name</h2>
+        <h4 class="popup__subtitle">Оцените качества по шкале от 1 до 5</h4>
+        <span class="popup__option">Weirdness</span>
+        <input type="number" class="popup__number" min="1" max="5">
+        <span class="popup__option">Dexterity</span>
+        <input type="number" class="popup__number" min="1" max="5">
+        <span class="popup__option">Intelligence</span>
+        <input type="number" class="popup__number" min="1" max="5">
+        <h4 class="popup__subtitle">Оставьте фидбек</h4>
+        <textarea class="popup__text" rows="5"></textarea>
+        <button class="popup__button">Отправить</button>
+      </div>
+    </div>
   </div>
   <script src="/test task.e31bb0bc.js"></script>
 </body>
+
 </html>

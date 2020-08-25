@@ -164,16 +164,17 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var Colleague = /*#__PURE__*/function () {
-  function Colleague(colleague) {
+  function Colleague(colleague, index) {
     _classCallCheck(this, Colleague);
 
     this._colleague = colleague;
+    this._index = index;
   }
 
   _createClass(Colleague, [{
     key: "create",
     value: function create() {
-      return "<div class=\"card\">\n   <h3 class=\"card__title\">".concat(this._colleague.name, "</h3>\n   <p class=\"card__description\">").concat(this._colleague.job, "</p>\n </div>");
+      return "<div data-index=\"".concat(this._index, "\" class=\"card\">\n   <h3 class=\"card__title\">").concat(this._colleague.name, "</h3>\n   <p class=\"card__description\">").concat(this._colleague.job, "</p>\n </div>");
     }
   }]);
 
@@ -245,6 +246,53 @@ var Leader = /*#__PURE__*/function () {
 }();
 
 exports.default = Leader;
+},{}],"blocks/popup/popup.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Popup = /*#__PURE__*/function () {
+  function Popup(container) {
+    var _this = this;
+
+    _classCallCheck(this, Popup);
+
+    this._container = container;
+    this._name = container.querySelector('.popup__title');
+    this._popupClose = container.querySelector('.popup__close');
+
+    this._popupClose.addEventListener('click', function () {
+      return _this.close();
+    });
+  }
+
+  _createClass(Popup, [{
+    key: "open",
+    value: function open(colleague) {
+      this._container.classList.add('popup_opened');
+
+      this._name.innerHTML = colleague.name;
+    }
+  }, {
+    key: "close",
+    value: function close() {
+      this._container.classList.remove('popup_opened');
+    }
+  }]);
+
+  return Popup;
+}();
+
+exports.default = Popup;
 },{}],"index.js":[function(require,module,exports) {
 "use strict";
 
@@ -255,6 +303,8 @@ var _colleague = _interopRequireDefault(require("./blocks/colleague/colleague"))
 var _feedback = _interopRequireDefault(require("./blocks/feedback/feedback"));
 
 var _leader = _interopRequireDefault(require("./blocks/leader/leader"));
+
+var _popup = _interopRequireDefault(require("./blocks/popup/popup"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -295,31 +345,84 @@ var dictionary = {
     name: 'Giraffe Orange',
     text: 'Extremely Tiny'
   }],
-  leaders: [{
-    name: 'Bear Polar',
-    quality: 'Intelligence',
-    value: '4.8'
-  }, {
-    name: 'Cat Grey',
-    quality: 'Dexterity',
-    value: '4.7'
-  }, {
-    name: 'Pickle Green',
-    quality: 'Weirdness',
-    value: '394'
-  }]
+  leaders: {
+    all: [{
+      name: 'Bear Polar',
+      quality: 'Intelligence',
+      value: '4.8'
+    }, {
+      name: 'Cat Grey',
+      quality: 'Dexterity',
+      value: '4.7'
+    }, {
+      name: 'Pickle Green',
+      quality: 'Weirdness',
+      value: '394'
+    }],
+    weirdness: [{
+      name: 'Pickle Green',
+      quality: 'Weirdness',
+      value: '394'
+    }],
+    dexterity: [{
+      name: 'Cat Grey',
+      quality: 'Dexterity',
+      value: '4.7'
+    }],
+    intelligence: [{
+      name: 'Bear Polar',
+      quality: 'Intelligence',
+      value: '4.8'
+    }]
+  }
 };
+var feedback = document.querySelector('.panel_feedback');
+var leader = document.querySelector('.panel_leaders');
 document.querySelector('.page').insertAdjacentHTML('beforeend', new _profile.default(dictionary.profile).create());
-document.querySelector('.panel_colleagues').insertAdjacentHTML('beforeend', dictionary.colleagues.map(function (colleague) {
-  return new _colleague.default(colleague).create();
+document.querySelector('.panel_colleagues').insertAdjacentHTML('beforeend', dictionary.colleagues.map(function (colleague, index) {
+  return new _colleague.default(colleague, index).create();
 }).join(''));
-document.querySelector('.panel_feedback').insertAdjacentHTML('beforeend', dictionary.feedback.map(function (message) {
+feedback.insertAdjacentHTML('beforeend', dictionary.feedback.map(function (message) {
   return new _feedback.default(message).create();
 }).join(''));
-document.querySelector('.panel_leaders').insertAdjacentHTML('beforeend', dictionary.leaders.map(function (leader) {
+leader.insertAdjacentHTML('beforeend', dictionary.leaders.all.map(function (leader) {
   return new _leader.default(leader).create();
 }).join(''));
-},{"./blocks/profile/profile":"blocks/profile/profile.js","./blocks/colleague/colleague":"blocks/colleague/colleague.js","./blocks/feedback/feedback":"blocks/feedback/feedback.js","./blocks/leader/leader":"blocks/leader/leader.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+var popup = new _popup.default(document.querySelector('.popup'));
+
+function leaveFeedback(colleague) {
+  popup.open(colleague);
+}
+
+document.querySelector('.panel_colleagues').addEventListener('click', function (e, target) {
+  return popup.open(dictionary.colleagues[e.target.closest('.card').dataset.index]);
+});
+
+function fetchFeedback() {
+  feedback.querySelectorAll('.card').forEach(function (item) {
+    return item.remove();
+  });
+  feedback.insertAdjacentHTML('beforeend', dictionary.feedback.map(function (message) {
+    return new _feedback.default(message).create();
+  }).join(''));
+  console.log('updated');
+}
+
+setInterval(fetchFeedback, 20000);
+var selector = document.querySelector('.panel__select');
+selector.addEventListener('change', function (e) {
+  return fetchLeader(e.target.value);
+});
+
+function fetchLeader(quality) {
+  leader.querySelectorAll('.card').forEach(function (item) {
+    return item.remove();
+  });
+  leader.insertAdjacentHTML('beforeend', dictionary.leaders[quality].map(function (leader) {
+    return new _leader.default(leader).create();
+  }).join(''));
+}
+},{"./blocks/profile/profile":"blocks/profile/profile.js","./blocks/colleague/colleague":"blocks/colleague/colleague.js","./blocks/feedback/feedback":"blocks/feedback/feedback.js","./blocks/leader/leader":"blocks/leader/leader.js","./blocks/popup/popup":"blocks/popup/popup.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -347,7 +450,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61215" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60365" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
