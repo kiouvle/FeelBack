@@ -2,7 +2,7 @@
   padding: 1.5% 2%;
   display: grid;
   grid-template-columns: 30% 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: auto auto;
   column-gap: 1.5%;
   row-gap: 2%;
   font-family: Arial, Helvetica, sans-serif;
