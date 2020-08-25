@@ -1,0 +1,5 @@
+@import url(./_pic/profile__info_pic.css);
+
+.profile__info {
+  display: flex;
+}

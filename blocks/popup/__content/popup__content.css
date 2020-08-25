@@ -1,0 +1,9 @@
+.popup__content {
+  width: 400px;
+  min-height: 330px;
+  background-color: #e0e0e0;
+  position: relative;
+  box-sizing: border-box;
+  color: #3b3b3b;
+  padding: 1%;
+}

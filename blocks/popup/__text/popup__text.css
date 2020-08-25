@@ -1,0 +1,6 @@
+.popup__text {
+  display: block;
+  width: calc(100% - 4px);
+  border: none;
+  background-color: #fafafa;
+}

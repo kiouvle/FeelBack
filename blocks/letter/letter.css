@@ -1,0 +1,11 @@
+@import url(./__title/letter__title.css);
+@import url(./__subtitle/letter__subtitle.css);
+@import url(./__input/letter__input.css);
+@import url(./__button/letter__button.css);
+
+.letter {
+  background-color: #e0e0e0;
+  grid-row: 2/3;
+  grid-column: 2/4;
+  padding: 2%;
+}

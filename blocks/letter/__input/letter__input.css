@@ -1,0 +1,6 @@
+.letter__input {
+  display: block;
+  width: calc(100% - 4px);  
+  border: none;
+  background-color: #fafafa;
+}

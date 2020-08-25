@@ -1,0 +1,8 @@
+@import url(./__description/card__description.css);
+@import url(./__title/card__title.css);
+
+.card {
+  background-color: #fafafa;
+  padding: 2%;
+  margin-bottom: 2%;
+}

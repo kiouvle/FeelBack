@@ -1,0 +1,11 @@
+@import url(./__title/panel__title.css);
+@import url(./__select/panel__select.css);
+@import url(./_colleagues/panel_colleagues.css);
+@import url(./_feedback/panel_feedback.css);
+@import url(./_leaders/panel_leaders.css);
+
+.panel {
+  background-color: #e0e0e0;
+  padding: 3%;
+  position: relative;
+}

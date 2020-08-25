@@ -4,7 +4,7 @@ export default class Popup {
     this._name = container.querySelector('.popup__title');
     this._popupClose = container.querySelector('.popup__close');
     this._popupClose.addEventListener('click', () => this.close());
-
+    console.log(this)
   }
 
   open(colleague) {

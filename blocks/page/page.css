@@ -1,0 +1,11 @@
+.page {
+  padding: 1.5% 2%;
+  display: grid;
+  grid-template-columns: 30% 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  column-gap: 1.5%;
+  row-gap: 2%;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #3b3b3b;
+  font-size: 14px;
+}

@@ -1,0 +1,12 @@
+@import url(./__title/profile__title.css);
+@import url(./__quantity/profile__quantity.css);
+@import url(./__info/profile__info.css);
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  background-color: #e0e0e0;
+  grid-row: 1/2;
+  grid-column: 1/2;
+  padding: 5%;
+}
